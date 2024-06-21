@@ -40,80 +40,70 @@ require 'modules/functions.php'
 </header>
 <main>
     <div class="container-lg">
-        <form class="row pt-3" method="post">
-            <div class="col-lg-12">
-                <p class="display-5 fw-bold"><?=getSmartphoneName($_GET['id'])?> bestellen</p>
-                <div class="mb-4 col-lg-12">
-                    <label for="exampleFormControlInput1" class="form-label">Voornaam</label>
-                    <input type="text" value="<?php if(isset($_POST['firstName'])){ echo $_POST['firstName']; } ?>" class="form-control <?php if(isset($_POST['firstName'])){
-                        if(empty($_POST['firstName'])){
-                            echo "is-invalid";
-                        } else {echo "is-valid";}
-                    } ?>" name="firstName" id="exampleFormControlInput1" required>
-                    <div class="invalid-feedback">
-                        Voer een voornaam in aub.
-                    </div>
-                    <div class="mb-4 mt-4 col-lg-12">
-                        <label for="exampleFormControlInput2" class="form-label">Achternaam</label>
-                        <input type="text" value="<?php if(isset($_POST['lastName'])){ echo $_POST['lastName']; } ?>" class="form-control <?php if(isset($_POST['lastName'])){
-                            if(empty($_POST['lastName'])){
-                                echo "is-invalid";
-                            } else {echo "is-valid";}
-                        } ?>" name="lastName" id="exampleFormControlInput2" required>
-                        <div class="invalid-feedback">
-                            Voer een achternaam in aub.
-                        </div>
-                    </div>
-                    <div class="mb-4 col-lg-12">
-                        <label for="exampleFormControlInput3" class="form-label">Email</label>
-                        <input type="email" value="<?php if(isset($_POST['mail'])){ echo $_POST['mail']; } ?>" class="form-control <?php if(isset($mail)){
-                            if(empty($_POST['mail'])){
-                                echo "is-invalid";
-                            } elseif($_SESSION['mail'] === false) {
-                                echo "is-invalid";
-                            } else {echo "is-valid";}
-                        }?>" name="mail" id="exampleFormControlInput3" required>
-                        <div class="invalid-feedback">
-                            Voer een e-mail adres in aub.
-                        </div>
-                    </div>
-                    <div class="mb-4 col-lg-12">
-                        <label for="exampleFormControlInput4" class="form-label">Adres</label>
-                        <input type="text" value="<?php if(isset($_POST['adress'])){ echo $_POST['adress']; } ?>" class="form-control <?php if(isset($_POST['adress'])){
-                            if(empty($_POST['adress'])){
-                                echo "is-invalid";
-                            } else {echo "is-valid";}
-                        } ?>" name="adress" id="exampleFormControlInput4" required>
-                        <div class="invalid-feedback">
-                            Voer een adres in aub.
-                        </div>
-                    </div>
-                    <div class="mb-4 col-lg-12">
-                        <label for="exampleFormControlInput5" class="form-label">Postcode</label>
-                        <input type="text" value="<?php if(isset($_POST['zipcode'])){ echo $_POST['zipcode']; } ?>" class="form-control <?php if(isset($_POST['zipcode'])){
-                            if(empty($_POST['zipcode'])){
-                                echo "is-invalid";
-                            } else {echo "is-valid";}
-                        } ?>" name="zipcode" id="exampleFormControlInput5" required>
-                        <div class="invalid-feedback">
-                            Voer een postcode in aub.
-                        </div>
-                    </div>
-                    <div class="mb-3 col-lg-12">
-                        <label for="exampleFormControlInput6" class="form-label">Woonplaats</label>
-                        <input type="name" value="<?php if(isset($_POST['area'])){ echo $_POST['area']; } ?>" class="form-control <?php if(isset($_POST['area'])){
-                            if(empty($_POST['area'])){
-                                echo "is-invalid";
-                            } else {echo "is-valid";}} ?>" name="area" id="exampleFormControlInput6" required>
-                        <div class="invalid-feedback">
-                            Voer een woonplaats in aub.
-                        </div>
-                    </div>
-                <input class="btn btn-md btn-dark text-white mb-5" type="submit" name="finish">
+        <p class="display-5 fw-bold"><?=getSmartphoneName($_GET['id'])?> bestellen</p>
+        <form  method="post">
+            <div class="mb-3 mt-3">
+                <label for="fname" class="form-label">Voornaam:</label>
+                <input type="text" class="form-control" id="fname" placeholder="Enter firstname" name="fname" required>
+                <div  class="form-text text-danger">
+                    <?= $errors['fname'] ?? '' ?>
+                </div>
             </div>
+
+            <div class="mb-3 mt-3">
+                <label for="lname" class="form-label">Achternaam:</label>
+                <input type="text" class="form-control" id="lname" placeholder="Enter lastname" name="lname" required>
+                <div  class="form-text text-danger">
+                    <?= $errors['lname'] ?? '' ?>
+                </div>
+            </div>
+
+            <div class="mb-3 mt-3">
+                <label for="email" class="form-label">Email:</label>
+                <input type="text" class="form-control" id="email" placeholder="Enter email" name="email" required>
+                <div  class="form-text text-danger">
+                    <?= $errors['email'] ?? '' ?>
+                </div>
+            </div>
+
+            <div class="mb-3 mt-3">
+                <label for="adress" class="form-label">Adres:</label>
+                <input type="text" class="form-control" id="adress" placeholder="Enter adress" name="adress" required>
+                <div  class="form-text text-danger">
+                    <?= $errors['adress'] ?? '' ?>
+                </div>
+            </div>
+
+            <div class="mb-3 mt-3">
+                <label for="zipcode" class="form-label">Postcode:</label>
+                <input type="text" class="form-control" id="zipcode" placeholder="Enter zipcode" name="zipcode" required>
+                <div  class="form-text text-danger">
+                    <?= $errors['zipcode'] ?? '' ?>
+                </div>
+            </div>
+
+            <div class="mb-3 mt-3">
+                <label for="city" class="form-label">Woonplaats:</label>
+                <input type="text" class="form-control" id="city" placeholder="Enter city" name="city" required>
+                <div  class="form-text text-danger">
+                    <?= $errors['city'] ?? '' ?>
+                </div>
+            </div>
+
+            <div class="form-check mb-3">
+                <input class="form-check-input" type="checkbox" id="myCheck" name="remember" required>
+                <label class="form-check-label" for="myCheck">I agree on conditions.</label>
+                <div  class="form-text text-danger">
+                    <?= $errors['agree'] ?? '' ?>
+                </div>
+            </div>
+
+
+            <button type="submit" class="btn btn-primary mb-5">Submit</button>
         </form>
     </div>
 </main>
+
 <footer class="bg-dark">
     <div class="container-fluid text-white">
         <div class="row pb-3">
