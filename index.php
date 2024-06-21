@@ -1,3 +1,7 @@
+<?php
+    session_start();
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,6 +40,14 @@
     </header>
     <main>
         <div class="container-fluid">
+            <div class="row">
+                <?php if(!empty($_SESSION['message'])): ?>
+                    <div class="alert alert-success" role="alert">
+                        <?=$_SESSION['message']?>
+                        <?php $_SESSION['message']=null;?>
+                    </div>
+                <?php endif;?>
+            </div>
             <div class="row">
                 <div class="col-md-12 text-center pt-3">
                     <p class="fw-bold display-4"><?php

@@ -69,3 +69,22 @@ function getVendorNameFromProductId($id)
     //var_dump($smartphone->name);
     return $vendor->name;
 }
+
+
+function savePurchase(array $inputs):bool
+{
+    global $pdo;
+
+    $sth = $pdo->prepare('INSERT INTO purchase  (fname,lname,email,address,zipcode,city,date,smartphone_id) VALUES (?,?,?,?,?,?,NOW(),?)');
+    $sth->bindParam(1, $inputs['fname']);
+    $sth->bindParam(2, $inputs['lname']);
+    $sth->bindParam(3,$inputs['email']);
+    $sth->bindParam(4, $inputs['address']);
+    $sth->bindParam(5, $inputs['zipcode']);
+    $sth->bindParam(6, $inputs['city']);
+    $sth->bindParam(7, $_GET['id']);
+
+    return $sth->execute();
+
+}
+
