@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 14 jun 2024 om 15:06
+-- Gegenereerd op: 21 jun 2024 om 17:34
 -- Serverversie: 10.4.11-MariaDB
 -- PHP-versie: 7.4.5
 
@@ -22,6 +22,44 @@ SET time_zone = "+00:00";
 --
 CREATE DATABASE IF NOT EXISTS `smartphone4u` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 USE `smartphone4u`;
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `purchase`
+--
+
+DROP TABLE IF EXISTS `purchase`;
+CREATE TABLE `purchase` (
+  `id` int(11) NOT NULL,
+  `fname` varchar(255) NOT NULL,
+  `lname` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `address` varchar(255) NOT NULL,
+  `zipcode` varchar(255) NOT NULL,
+  `city` varchar(255) NOT NULL,
+  `date` date NOT NULL,
+  `smartphone_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `purchase`
+--
+
+INSERT INTO `purchase` (`id`, `fname`, `lname`, `email`, `address`, `zipcode`, `city`, `date`, `smartphone_id`) VALUES
+(1, 'Marcel', 'van der Linden', 'mjlinden@kabelfoon.nl', 'Agnes Croesinklaan', '2636HM', 'Schipluiden', '2024-06-21', 8),
+(2, 'Marcel', 'van der Linden', 'mjlinden@kabelfoon.nl', 'Agnes Croesinklaan', '2636HM', 'Schipluiden', '2024-06-21', 8),
+(3, 'Marcel', 'van der Linden', 'mjlinden@kabelfoon.nl', 'Agnes Croesinklaan', '2636HM', 'Schipluiden', '2024-06-21', 9),
+(4, 'Marcel', 'van der Linden', 'mjlinden@kabelfoon.nl', 'Agnes Croesinklaan', '2636HM', 'Schipluiden', '2024-06-21', 5),
+(5, 'Marcel', 'van der Linden', 'mjlinden@kabelfoon.nl', 'Agnes Croesinklaan', '2636HM', 'Schipluiden', '2024-06-21', 7),
+(6, 'Marcel', 'van der Linden', 'mjlinden@kabelfoon.nl', 'Agnes Croesinklaan', '2636HM', 'Schipluiden', '2024-06-21', 5),
+(7, 'Marcel', 'van der Linden', 'mjlinden@kabelfoon.nl', 'Agnes Croesinklaan', '2636HM', 'Schipluiden', '2024-06-21', 10),
+(8, 'Marcel', 'van der Linden', 'mjlinden@kabelfoon.nl', 'Agnes Croesinklaan', '2636HM', 'Schipluiden', '2024-06-21', 1),
+(9, 'Marcel', 'van der Linden', 'mjlinden@kabelfoon.nl', 'Agnes Croesinklaan', '2636HM', 'Schipluiden', '2024-06-21', 9),
+(10, 'Marcel', 'van der Linden', 'mjlinden@kabelfoon.nl', 'Agnes Croesinklaan', '2636HM', 'Schipluiden', '2024-06-21', 5),
+(11, 'Marcel', 'van der Linden', 'mjlinden@kabelfoon.nl', 'Agnes Croesinklaan', '2636HM', 'Schipluiden', '2024-06-21', 8),
+(12, 'Marcel', 'van der Linden', 'mjlinden@kabelfoon.nl', 'Agnes Croesinklaan', '2636HM', 'Schipluiden', '2024-06-21', 9),
+(13, 'Hanneke', 'Kool', 'h.kool@kool.nl', 'land 4', '2345fg', 'delft', '2024-06-21', 8);
 
 -- --------------------------------------------------------
 
@@ -72,11 +110,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `email`, `password`, `first_name`, `last_name`, `role`) VALUES
-(1, 'admin@healthone.com', 'qwerty', 'Piet ', 'Klaassen', 'admin'),
-(2, 'jdegraaf@icoud.com', 'qwerty', 'Jan', 'de Graaf', 'member'),
-(3, 'susan@kabelfoon.nl', '12345', 'Susan', 'van der Linden van Leerdam', 'member'),
-(4, 'okke@hotmail.com', 'qwerty', 'Okke', 'van der Linden', 'member'),
-(5, 'koen@kabelfoon.nl', 'qwerty', 'Koen', 'van de Linden', 'member');
+(1, 'admin@smartphone.com', 'qwerty', 'Piet ', 'Klaassen', 'admin');
 
 -- --------------------------------------------------------
 
@@ -105,11 +139,24 @@ INSERT INTO `vendor` (`id`, `name`, `picture`, `description`) VALUES
 --
 
 --
+-- Indexen voor tabel `purchase`
+--
+ALTER TABLE `purchase`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `product_id` (`smartphone_id`);
+
+--
 -- Indexen voor tabel `smartphone`
 --
 ALTER TABLE `smartphone`
   ADD PRIMARY KEY (`id`),
   ADD KEY `category_id` (`vendor_id`);
+
+--
+-- Indexen voor tabel `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexen voor tabel `vendor`
@@ -120,6 +167,12 @@ ALTER TABLE `vendor`
 --
 -- AUTO_INCREMENT voor geëxporteerde tabellen
 --
+
+--
+-- AUTO_INCREMENT voor een tabel `purchase`
+--
+ALTER TABLE `purchase`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT voor een tabel `smartphone`
@@ -136,6 +189,12 @@ ALTER TABLE `vendor`
 --
 -- Beperkingen voor geëxporteerde tabellen
 --
+
+--
+-- Beperkingen voor tabel `purchase`
+--
+ALTER TABLE `purchase`
+  ADD CONSTRAINT `purchase_ibfk_1` FOREIGN KEY (`smartphone_id`) REFERENCES `smartphone` (`id`);
 
 --
 -- Beperkingen voor tabel `smartphone`

@@ -88,3 +88,55 @@ function savePurchase(array $inputs):bool
 
 }
 
+function checkLogin($inputs):string
+{
+    global $pdo;
+
+        $sql = 'SELECT * FROM `user` WHERE `email` = :e AND `password` = :p';
+        $sth = $pdo->prepare($sql);
+        $sth->bindParam(':e',$inputs['email']);
+        $sth->bindParam(':p',$inputs['password']);
+        $sth->setFetchMode(PDO::FETCH_CLASS,'User');
+        $sth->execute();
+        $user = $sth->fetch();
+        var_dump($user);
+
+        //$user=false verkeerde password/username, anders $user is object
+        if($user!==false)
+        {
+            $_SESSION['user']=$user;
+            if($_SESSION['user']->role=="admin")
+            {
+                return 'ADMIN';
+            }
+        }
+        return 'FAILURE';
+}
+
+function isAdmin():bool
+{
+    //controleer of er ingelogd is en de user de rol admin heeft
+    if(isset($_SESSION['user'])&&!empty($_SESSION['user']))
+    {
+        $user=$_SESSION['user'];
+        if ($user->role == "admin")
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    return false;
+}
+
+function getPurchases():array
+{
+    global $pdo;
+    $sth = $pdo->prepare('SELECT * FROM purchase ORDER BY date ');
+    $sth->execute();
+    return $sth->fetchAll(PDO::FETCH_CLASS, 'Purchase');
+
+}
+

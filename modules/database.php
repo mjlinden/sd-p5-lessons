@@ -16,6 +16,9 @@ try {
     $pdo = new PDO($dsn, $user, $pass, $options);
     include_once('classes/Vendor.php');
     include_once ('classes/Smartphone.php');
+    include_once ('classes/User.php');
+    include_once ('classes/Purchase.php');
+
 } catch (\PDOException $e) {
     throw new \PDOException($e->getMessage(), (int)$e->getCode());
 }

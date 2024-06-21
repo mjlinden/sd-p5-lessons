@@ -4,10 +4,7 @@ var_dump($inputs)
 ?>
 
 <!DOCTYPE html>
-<?php
-include_once 'modules/database.php';
-include_once 'modules/functions.php'
-?>
+
 <html>
 <head>
     <meta charset="UTF-8">

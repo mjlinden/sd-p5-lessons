@@ -1,7 +1,4 @@
 <?php
-session_start();
-include_once 'modules/database.php';
-include_once 'modules/functions.php';
 
 const FNAME_REQUIRED = 'Voornaam invullen';
 const LNAME_REQUIRED = 'Achternaam invullen';
